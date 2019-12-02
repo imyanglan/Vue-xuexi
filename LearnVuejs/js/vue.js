@@ -34,6 +34,8 @@
   /**
    * Check if value is primitive.
    */
+
+
   function isPrimitive (value) {
     return (
       typeof value === 'string' ||
