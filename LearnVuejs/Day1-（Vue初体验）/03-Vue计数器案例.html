@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--    先绑定数据-->
+    <h2>当前计数：{{counter}}</h2>
+<!--    再添加两个按钮 再监听它们 我们如果要监听事件用v-on 然后再告诉它监听的是什么事件  -->
+<!--一旦监听到事件就要执行某一个方法或函数 这里我们执行将变量加一 下面按钮以此类推-->
+<!--    <button v-on:click="counter++">+</button>-->
+<!--    <button v-on:click="counter--">-</button>-->
+<!--因为页面是响应式的所以在这里获取到counter被加一改变后是会同步反映到页面上的-->
+<!--    如果我们监听到的事件比较复杂的话 我们就要给它定义个函数-->
+              <button v-on:click="add">+</button>
+    <button v-on:click="sub">-</button>
+<!--   -->
+</div>
+<script src="../js/vue.js"></script>
+<script>
+    //响应式里面有做一层代理的
+    const app=new Vue({
+     el:'#app',
+     data:{
+         //给它一个变量用来计数
+         counter:0
+     },
+        methods:{//用来定义方法的
+            // 执行函数我们要在这里面写
+            add:function () {//加
+                console.log('add被执行');
+                //在这里面只输入变量名是找不到的，因为这里找的是全局变量 我们要在前面写一个this
+                this.counter++;
+            },
+            sub:function () {//减
+                console.log("sub被执行");
+                this.counter--;
+            }
+        }
+
+
+    })
+</script>
+</body>
+</html>
