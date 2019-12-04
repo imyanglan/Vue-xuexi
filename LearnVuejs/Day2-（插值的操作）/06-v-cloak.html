@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+<!-- 第二步：  然后我来这里定义一个样式 结合之前的判断由这里判断是否展示那段div代码-->
+  <style>
+    [v-cloak]{
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- 第一步：  我们将v-cloak放在div中当这段代码在下面进行解析的时候会自动删除这个v-cloak这个代码-->
+<div id="app" v-cloak>
+<!--  我们的浏览器在解析我们HTML代码的时候它是从上往下解析的，
+当它解析到第十五行的时候它就会-->
+<!--默认把我们的 {{message}}展示出来，
+当运行到下面的script时它才会将这个message解析将真正需要展示的数据展示出来-->
+  <h2> {{message}}</h2>
+<!--  而在我们开发的时候可能会遇到这样一种情况，浏览器在执行js的时候突然卡住了
+这时我们在界面可能就只能看见被渲染的message但没显示我们需要的数据，要等js缓过来的
+时候数据也就传过去了，才发生改变-->
+
+</div>
+
+<script src="../js/vue.js"> </script>
+<script>
+  //所以我们可以对此得出一个判断
+  //在vue解析之前，div中有一个属性v-cloak
+  //在vue解析之后，div中没有一个属性v-cloak
+  //我们可以通过判断以上来决定上面那段html代码要不要进行展示
+  setTimeout(function () {
+    const app=new Vue({
+      el:'#app',
+      data:{
+        message:'你好啊',
+      }
+    })
+  },1000)
+
+
+</script>
+
+</body>
+</html>

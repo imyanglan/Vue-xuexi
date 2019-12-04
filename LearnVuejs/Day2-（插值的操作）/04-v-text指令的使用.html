@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <h2> {{message}}</h2>
+<!--  v-text其实类似于Mustache语法，也就是将获取的值作为文本解析出来-->
+<h2 v-text="message"></h2>
+<!--  但它不常用，原因是不太灵活-->
+  <h2>{{message}},Vuejs!</h2>
+<h2 v-text="message">，Vuejs!</h2>
+<!--  如果用它来进行拼接，它没有mustache那样聪明方便，直接就会拼在一起
+它会将内容给覆盖掉，并不会拼接。所以没有那么方便好用，使用较少-->
+
+</div>
+
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+    }
+ })
+</script>
+
+
+</body>
+</html>
