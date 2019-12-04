@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--如果我们直接引用该变量的话-->
+<div id="app">
+  <h2> {{url}}</h2>
+  <!--我们直接获取的话它是无法解析的只能得到一个字符串
+<a href="http://wwww.baidu.com">百度一下</a>不会得到我们想要的结果
+如果我们要解析这种html的话该咋办？-->
+<!--  这时我们用v-html对url进行解析，它就是将url作为html格式进行输出-->
+  <h2 v-html="url"></h2>
+
+</div>
+
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      //有时我们从服务器获取链接的时候可能传过来的并不是一个超链接可能还包含标签或者别的东西
+      //比如我们要获取一个url，然后服务器给我们返回以下数据
+      url:'<a href="http://wwww.baidu.com">百度一下</a>'
+      //如果我们服务器返回的数据类似这种格式我们就可以用v-html进行解析
+    }
+ })
+</script>
+
+
+
+</body>
+</html>
