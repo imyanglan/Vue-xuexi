@@ -8,8 +8,14 @@
 
 
 <div id="app">
+<!--  mustache语法-->
   <h2>{{message}}</h2>
+<!--  mustache语法中，不仅仅可以直接写变量，也可以写简单的表达式-->
   <h3>{{signature + name}}</h3>
+  <h3>{{signature +' '+ name}}</h3>
+  <h3>{{signature }} {{name}}</h3>
+  <h3>{{counter * 2}}</h3>
+
 </div>
 <script src="../js/vue.js"> </script>
 <script>
@@ -17,9 +23,9 @@
     el:'#app',
     data:{
       message:'签名',
-      signature:'或许我们会再相遇，当你鼓起勇气飞行',
-      name:'吴青峰'
-
+      signature:'或许我们会再相遇，当你鼓起勇气飞行',//再定义两个变量
+      name:' —— 吴青峰',
+      counter:10
     }
  })
 </script>
