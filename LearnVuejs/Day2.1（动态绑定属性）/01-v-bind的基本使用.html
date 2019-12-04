@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--我们写一张图片的链接以前就是直接在src中给地址一般都是写死的现在我们要学用bind动态绑定改属性-->
+<!--  <img src="https://cn.vuejs.org/images/logo.png" alt="">-->
+
+<!--  我们能用mustache语法将地址写到属性里吗？-->
+<!--  <img src="{{imgURL}}" alt="">-->
+<!--答案是：不行！因为Mustache语法只能在我们元素的内容里使用，如果按以上的使用方式，
+它只会将{{imgURL}}这一句话作为字符串绑定到上面-->
+
+<!--  第二步：使用b-bind指令
+在属性前加上v-bind语法，我们Vue实例里会解析这个指令,这样它就会把属性内容当成一个变量
+然后就会根据这个变量去对象里找对应的地址，再把这个地址传递过来-->
+  <img v-bind:src="imgURL" alt="">
+<!--  再来个超链接的例子 : 后面的冒号表示给哪个变量赋值-->
+  <a v-bind:href="aHref">百度一下</a>
+<!--  v-bind还有缩写  接下来我就用语法糖的写法再写一遍   缩写就是一个：冒号 -->
+  <img :src="imgURL" alt="">
+  <a :href="aHref">百度一下</a>
+
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      //将图片地址作为服务器请求过来的数据一般都会放在data里面，然后通过某种语法给它
+      //动态绑定到上面的src属性中
+      //第一步：data中获取图片的动态地址
+      imgURL:'https://cn.vuejs.org/images/logo.png',
+      aHref:'http://www.baidu.com'
+
+    }
+ })
+</script>
+
+</body>
+</html>
