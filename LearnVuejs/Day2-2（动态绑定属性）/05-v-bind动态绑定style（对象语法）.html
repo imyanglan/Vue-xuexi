@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+<!--  在之前绑定class它的key：value分别是类名和布尔值如下：-->
+<!--  <h2 :class="{类名：Boolean}">{{message}}</h2>-->
+<!--  但是到了我们的style中，它的key代表的是css的属性名：后面跟的就是属性值-->
+<!--  <h2 :style="{key（属性名）：value（属性值）}">{{message}}</h2>-->
+  <h2 :style="{'font-size':'50px'}">{{message}}</h2>
+<!--在这里的font-size属性我们可以使用两种方式，第一种写法就是上面的，通过我们的-来进行连接
+    还有一种写法是直接使用驼峰标识fontSize,如果我们用font-size的方法一定要在两边加上单引号
+    还有一点需要注意的是，我们在属性值上也要加单引号引用，不然程序会报错，因为在我们Vue的
+    语法里面它把属性值和属性名作为变量来引用了，而不是字符串.
+    如果使用驼峰的方式写属性名就不用加单引号，但属性值还是要加上单引号。
+-->
+<!--接下来我们就来举一些动态绑定的例子-->
+<!--  第二步我们将它绑定到样式上-->
+  <h2 :style="{'font-size':FinalSize}">{{message}}</h2>
+<!--第四步：给它们拼在一起-->
+  <h2 :style="{'font-size':finalSize+'px',backgroundColor:finalColor}">{{message}}</h2>
+<!--如果你闲上面的太多也可按照前面的方法给它写到methods中引用过来 第五步-->
+  <h2 :style="getStyles()">{{message}}</h2>
+</div>
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      //第一步我们在里面设置一个属性值
+      FinalSize:'100px',
+      //如果我们不写字符串形式的直接给个数怎么办呢？ 第三步：
+      finalSize:100,
+      finalColor:'red'
+      //第六步
+    },methods:{
+      getStyles:function () {
+        return {'font-size':this.finalSize+'px',backgroundColor:this.finalColor}
+      }
+
+
+    }
+ })
+</script>
+
+
+</body>
+</html>

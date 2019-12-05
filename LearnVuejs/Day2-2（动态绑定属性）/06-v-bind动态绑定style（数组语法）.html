@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  因为用数组的话，这里就不是以键值对的形式传递了 第二步将这个变量引用引用-->
+  <h2 :style="[baseStyle,baseStyle1]">{{message}}</h2>
+</div>
+
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      //第一步建立一个变量
+      baseStyle:{backgroundColor:'red'},
+      baseStyle1:{'font-size':'100px'}
+      // 这就是数组语法
+
+    }
+ })
+</script>
+
+</body>
+</html>
