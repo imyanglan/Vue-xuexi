@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<style>
+  .active{
+    color: red;
+
+  }
+
+</style>
+
+<!--作业需求：点击列表中的任意一项，那么该项的文字变成红色-->
+
+<div id="app">
+  <h1>{{message}}</h1>
+  <ul>
+    <li :class="Red(index)"  v-on:click="aClick(index)" v-for="(i,index) in movies">{{i}}</li>
+  </ul>
+
+
+</div>
+
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'作业',
+      counter:0,
+      movies:['进击的巨人','某科学的超电磁炮','名侦探柯南','我的英雄学院'],
+      active:'active',
+      isActive:false,
+    },
+    methods:{
+      aClick:function (index) {
+        this.counter=index;
+        // 获取点击的值，并存到data的变量中
+      },
+      Red:function (index) {
+        if (this.counter==index){//来到这里判断找到符合刚刚点击的下标，然后依照它显示
+
+          return{active:true}
+        }
+        return{active:this.isActive}
+      }
+
+    }
+
+
+ })
+</script>
+
+</body>
+</html>
