@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<style>
+  .active{
+    color:red;
+  }
+  .aaa{
+    color: green;
+  }
+
+</style>
+
+<div id="app">
+<!--  我们用数组语法，只要像数组一样往里面加类名就行，当然它也是和普通的class类共存的-->
+  <h2 :class="['active','line']"> {{message}}</h2>
+  <h2 :class="[active,line]"> {{message}}</h2>
+<!--如果我们在数组里加上单引号那里面的数据会按字符串输出，如果我们不加单引号就会按变量进行输出-->
+  <h2 :class="getClass()"> {{message}}</h2>
+
+
+</div>
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      active:'aaa',
+      line:'eee'
+    },
+    methods:{
+      getClass:function () {
+        return [this.active,this.line]
+      }
+
+    }
+ })
+</script>
+
+</body>
+</html>
