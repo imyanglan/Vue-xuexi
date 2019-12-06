@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  然后这里我们有一个需求，我们需要把总价格显示在这里-->
+  <h2>总价格：{{totalPrice}}</h2>
+</div>
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+     books:[  //我们定义了一个数组，里面放了很多的书的信息
+       {id:110,name:'Unix编程艺术',price:119},
+       {id:111,name:'代码大全',price:105},
+       {id:112,name:'深入理解计算机原理',price:98},
+       {id:113,name:'现代操作系统',price:87},
+     ],
+    },//在这里我们就可以使用 计算属性 将价格作为属性进行计算
+    computed:{
+      totalPrice:function () {
+        // 这里我们用for循环  这里用let比较好这样子的话她是有块级作用域的 我们就不要用var了
+        let result=0;
+        for (let i=0:i<this.books.length;i++)
+        {
+          result+=this.books[i].price
+        }
+        return result
+        //在介绍两个es6的for循环语法
+        //  for (let i in this.books)
+        //  {
+        //    result+= this.books[i].price
+        //  }
+        //  for(let book of this.books)
+        //  {
+        //    //这里甚至直接省略了去引用 this.books[i]，它直接就是book
+        //    result+=book.price
+        //  }
+      }
+    }
+
+ })
+</script>
+
+
+</body>
+</html>

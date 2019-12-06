@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  1.直接拼接:语法过于繁琐-->
+  <h2>{{message}} {{name}}</h2>
+<!--  2.通过定义我们的methods   比如说这个函数我们要调用多次-->
+  <h2>{{getFullName()}}</h2>
+  <h2>{{getFullName()}}</h2>
+  <h2>{{getFullName()}}</h2>
+  <h2>{{getFullName()}}</h2>
+<!--      3.通过computed计算属性  这个我们也调用多次-->
+  <h2>{{fullName}}</h2>
+  <h2>{{fullName}}</h2>
+  <h2>{{fullName}}</h2>
+  <h2>{{fullName}}</h2>
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      name:'Vue'
+    },
+    //我们来到下面看看这两个函数分别被调用多少次
+    //我们会发现methods被调用了4次而computed只调用了一次
+    methods:{
+      getFullName:function () {//这里会重新计算  所以这个的性能比较低
+        console.log('getFullName');
+        return this.message+this.name
+      }
+    },
+    computed:{
+      fullName:function () {//因为Vue内部对这个计算属性做了一个缓存
+        console.log('fullName');
+        return this.message+this.name//它会观察你的这些东西有没有发生变化
+        //如果它发现这些数据没有变化那么它会直接返回之前的结果，而不是重新计算
+      }
+    }
+ })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<h2></h2>
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      name:'Vue'
+    },computed:{
+      // fullName:function () {  计算属性的简写（由下面的操作可知我们的计算属性只有get
+      // 方法所以，我们可以以这种方式来简写）
+      //   return this.message+','+this.name
+      // }
+      // 完整写法   在这里面定义一个属性这个属性对应的是一个对象，而这个对象里面有两个方法
+      fullName:{//这就是个属性  我们要在里面写两个方法
+        // set:function () {计算属性一般是没有set方法的 它只作为一个只读属性
+        //   //一般set属性都是空的，一般不需要实现 我们不希望别人随便我们的这个属性设置值
+        // },所以一般这个都是直接省略的 直接删除掉
+        get:function () {
+          return this.message+','+this.name
+        },
+        //如果我们确实有需要要使用set方法 那么使用方式如下
+        set:function (text) {//获取从控制台输入的数据
+          const texts=text.split(',')//依据逗号，进行分割
+          this.message=texts[0]
+          this.name=texts[1]
+        }
+      }
+
+
+    }
+ })
+</script>
+
+
+</body>
+</html>

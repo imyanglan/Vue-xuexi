@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  第一种方式：我们用之前学的-->
+  <h2>{{message +','+name }}</h2>
+<!--或是这样-->
+<h2>{{message}}, {{name}}</h2>
+<!--如果我们有多个地方都需要这两个单词的拼接的话，那我们其他地方都需要这样拼接起来显得
+非常麻烦，而且多余-->
+<!--   第二种方式：通过我们的方法-->
+  <h2>{{getFullName()}}</h2>
+<!--我们一般这里都习惯跟变量的名字，但是这里我们使用的是变量的方法，还有加个括号才行
+有没有不加括号就和属性使用一样的方式呢？-->
+<!--这就要说到我们的第三种方式：计算属性-->
+<h2>{{fullName}}</h2>
+<!--  我们在使用的时候不需要加小括号 直接这样像属性一样使用 比起上面的方式，这样
+既简单又清晰，这就是计算属性的基本使用的方式-->
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      //第一步 我们定义两个数据 如果想让它们一块显示的话该怎么做
+      message:'你好啊',
+      name:'Vuejs',
+
+    },
+    //有一些程序在显示之前也许需要我们做一些结合，或者对它们做一些变化，变化完了之后再
+    // 展示到我们上面的位置 这就要用到我们的方法
+    methods:{
+      getFullName:function () {
+        return this.message+','+this.name
+      }
+    },//我们需要再加一个新的属性，也是以后会经常用到的 计算的属性  第三种方式
+    computed:{
+      // 这里面也是定义函数  不过我们这里定义的函数不加类似于上面getXXX这样的动词的
+      // 因为computed：计算属性（）被叫做计算属性所以我们起名字的时候最好按照属性的方式起
+      fullName:function () {
+        return this.message+','+this.name
+      }
+      //其实它的本性就是属性，只不过我们在这里实现了它的get方法
+    }
+
+
+ })
+</script>
+
+
+</body>
+</html>
