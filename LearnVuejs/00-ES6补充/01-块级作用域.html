@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+
+
+<script>
+  //ES5中的var是没有块级作用域的
+  //ES6中的let是由块级作用域的
+  //在 ES5之前因为if和for都没有作用域的概念，所以在很多时候，我们都必须借助于function的作用域
+  //来解决应用外面变量的问题
+  //ES6中加入了let，它是有if和for的块级作用域
+  // //1.变量作用域：变量在什么范围内是可用的
+  // {
+  //   var name='Var'
+  //   console.log(name);//var在块里能用
+  // }//这个大括号内就是表示一个块，对于var来说，块不是它的限制，所以是在里面写还是在外面写都是
+  // //没有区别的
+  // console.log(name);//在块外面也能用
+  //
+
+
+ //  // 2.没有块级作用域引起的问题:if的块级
+ //  var abc;//我们先定义一个变量，先不赋值
+ //  if(true){
+ //    var name='Var'
+ //    // 我们在这里赋值
+ //    abc=function () { //我们就直接给这个变量赋值了一个函数
+ //      // 函数里面现在想引用我们外边的 name对象 对这个对象坐一些操作
+ //      console.log(name); //我们就是对它做一个打印
+ //    }
+ //    // 但在打印之前，如果别人有对name的修改
+ //    name='ling'//无论这条语句放在哪里，name都会改变，这不是我们所希望的
+ //    abc()
+ //  }
+ // // 我们拿到外面 这个语句依然可用：所以我们的if对它根本就没有任何限制
+ //  //console.log(name);
+  // 3.没有块级作用域引起的问题:for块级
+  var btns= document.getElementsByTagName('button');//拿到我们的button
+  for (var i=0;i<btns.length;i++)
+  {
+    // btns[i].addEventListener('click',function () {
+    //   console.log("第" + i + "个按钮被点击");//因为这个i用的是var所以它就算在函数里也会
+    //   //同步的改掉了也就是将for循环里的i也改了，所以输出的一直是最后改出来的值
+    // })这里的值就是随着i的值同步在变，也就是大家用的都是同一个i
+// 我们可以用闭包解决问题:因为函数是一个作用域，这样里面的i不会随便被别人改掉，已经存到内存中去了
+    (function (i) {//只有函数是有作用域的
+       btns[i].addEventListener('click',function () {
+         console.log("第" + i + "个按钮被点击");
+       })//也就是说这里有五个函数了，然后每个的值都是自己遍历到的那块数确定好存储下来的值不会被改变了
+      //意思就是每家都有代表自己的i编号，自己的编号i只能在自己这边范围内有用影响不了别人
+    })(i)
+  }
+  //到es6我们把var改成let就解决以上的问题了，就不用写闭包
+
+</script>
+
+
+</body>
+</html>

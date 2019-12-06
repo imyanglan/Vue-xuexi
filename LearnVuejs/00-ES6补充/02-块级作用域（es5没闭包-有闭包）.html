@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+    </head>
+<body>
+
+
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+
+
+<script>
+  
+  // 没有块级作用域引起的问题:for块级
+  var btns= document.getElementsByTagName('button');//拿到我们的button
+  for (var i=0;i<btns.length;i++)//我们从这里定义i其实它是在大括号里的
+  {
+   btns[i].addEventListener('click',function () {
+     console.log("第" + i + "个按钮被点击");
+   })
+
+  }
+
+  //1.情况一：ES5中没有使用闭包（错误的方式）
+  // i=0  这种情况下就是表示外边有一个i 而里面每个i的值都随着外面的i的变化而变化
+  // { 也就是不管从哪里定义一个i并给它值这里所有的i都会改成最新更改的数据
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+  //
+  // {
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+  //
+  // {
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+  //
+  // {
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+  //
+  // {
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+  // 2.情况二：ES5中使用闭包
+  // 没有块级作用域引起的问题:for块级
+  var btns= document.getElementsByTagName('button');//拿到我们的button
+  for (var i=0;i<btns.length;i++)
+  {//因为我们大括号里定义了一个函数，每次执行的都是这个函数
+    (function (i) {
+      btns[i].addEventListener('click',function () {
+        console.log("第" + i + "个按钮被点击");
+      })
+    })(i)
+
+  }
+  // i=0
+  //我们的代码块就行一下这种
+  // function (i) {  i=0  因为自己的作用域里有一个属于自己的i
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })(0)这里的小括号就是执行这个函数，因为函数有自己的作用域所以就不会用到外边的i了
+  // }
+  //
+  // function (i) {   i=1
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })(1)
+  // }
+  //
+  // function (i) {   i=2
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })(2)
+  // }
+  //
+  // function (i) {  i=3
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })(3)
+  // }
+  //
+  // function (i) {   i=4
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })(4)
+  // }
+  //第三种方式：ES6中的let
+  // 没有块级作用域引起的问题:for块级
+  const btns= document.getElementsByTagName('button');//拿到我们的button
+  for (let i=0;i<btns.length;i++)//我们从这里定义i其实它是在大括号里的
+  {
+    btns[i].addEventListener('click',function () {
+      console.log("第" + i + "个按钮被点击");
+    })
+
+  }
+
+  //
+  // { let是有块级作用域的 所以在这里面就有属于自己的i 就不会用外边的i了 i=0
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+  //
+  // {  i=1
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+  //
+  // {   i=2
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+  //
+  // {   i=3
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+  //
+  // {    i=4
+  //   btns[i].addEventListener('click',function () {
+  //     console.log("第" + i + "个按钮被点击");
+  //   })
+  //
+  // }
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html></title>
+</head>
+<body>
+
+
+
+</body>
+</html>
