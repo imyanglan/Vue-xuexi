@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+
+  <span v-if="isUser">
+    <label for="username">用户账号</label>
+  <input  type="text" id="username" >
+  </span>
+  <span v-else>
+    <label for="email">用户邮箱</label>
+    <input type="text" id="email" >
+  </span>
+<!--这个小问题就是 运行这个程序，在网页中进行输入时如果你在文本框中输入了值
+但要切换到另一个登录类型的话，那么里面的值不会被清空，它会出现在另一个文本框内-->
+  <button @click="isUser=!isUser">切换类型</button>
+
+
+
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      isUser:true,
+    }
+  })
+</script>
+
+
+</body>
+</html>

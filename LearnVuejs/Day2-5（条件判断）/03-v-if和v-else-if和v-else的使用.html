@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  这里我们就写一个由v-if和v-else-if和v-else的组合案例-->
+<!--  比如我们的成绩，如果成绩大于90分以上我们给它返回一个优秀
+如果在80到90之间我们就显示一个良好，在60到80之间我们显示一个合格
+在60分一下的话我们就显示不合格-->
+  <h2 v-if="score>=90">优秀</h2>
+  <h2 v-else-if="score>=80">良好</h2>
+<!--  这里我们不需要在写一个score<90,因为else if 是经过了上面的条件，不满足才来到下面的-->
+  <h2 v-else-if="score>=60">及格</h2>
+  <h2 v-else>不及格</h2>
+<!--  这个其实比较少用到，因为如果逻辑如果比较复杂的话最好在计算属性中写个函数判断-->
+  <h3>{{reset}}</h3>
+<!--  然后直接使用我们的计算属性就行了-->
+
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+    score:98,
+    },
+    computed:{
+      reset(){
+        let showMassage='';
+        //然后我在这个位置做一个判断
+        if (this.score>=90)
+        {
+          showMassage='优秀';
+        }else if(this.score>=80){
+          showMassage='良好';
+        }
+        else if(this.score>=60)
+        {
+          showMassage='及格';
+        }
+      else {
+          showMassage = '不及格';
+
+
+        }
+      return showMassage;
+      }
+    }
+ })
+</script>
+
+</body>
+</html>

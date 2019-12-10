@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+
+  <!--  当v-if和v-else一起使用-->
+  <div v-if="isShow">
+    <!--    我们通过调用Vue里的变量，可以灵活控制用不用显示这些元素-->
+    <h2>{{message}}</h2>
+    <h2>{{message}}</h2>
+    <h2>{{message}}</h2>
+    <h2>{{message}}</h2>
+    <h2>{{message}}</h2>
+  </div>
+  <h1 v-else="isShow">isShow为false时，显示我</h1>
+
+</div>
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+
+      isShow:true,//我们只要控制这个变量就能实现上面元素的显示和隐藏了
+    }
+  })
+</script>
+
+</body>
+</html>

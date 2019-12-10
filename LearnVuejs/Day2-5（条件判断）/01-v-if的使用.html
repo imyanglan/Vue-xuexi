@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  如果我们希望当满足某种条件的时候下面的元素才能被渲染出来要怎么做？ -->
+<!--  这个时候就可以使用我们的v-if了-->
+  <h2 v-if="true">{{message}}</h2>
+  <h2 v-if="false">{{message}}</h2>
+<!--  而v-if后面赋的这个值一般都是布尔类型的-->
+  <div v-if="isShow">
+<!--    我们通过调用Vue里的变量，可以灵活控制用不用显示这些元素-->
+    <h2>{{message}}</h2>
+    <h2>{{message}}</h2>
+    <h2>{{message}}</h2>
+    <h2>{{message}}</h2>
+    <h2>{{message}}</h2>
+  </div>
+
+
+</div>
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      //一般情况下，上面的判断都不是写死的，这时候我们需要一个变量
+      isShow:true,//我们只要控制这个变量就能实现上面的显示和隐藏了
+    }
+ })
+</script>
+
+</body>
+</html>

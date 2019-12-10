@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  1.演示事件调用的方法没有参数-->
+  <button @click="btnClick()">按钮一</button>
+  <button @click="btnClick">按钮二</button>
+<!--省不省略小括号都一样-->
+<!--2.在事件定义时，写方法时省略了小括号，但是方法本身是需要一个参数的，
+这个时候Vue会默认将浏览器生成的event事件对象作为参数传入到方法中-->
+<!--  先传个参数表示这个是需要传参并能正常运行的-->
+  <button @click="btnClick2(123)">按钮三</button>
+<!--  调用的时候我们不传参数 它会打印undefined-->
+  <button @click="btnClick2()">按钮四</button>
+<!--调用的时候我们甚至连小括号都省略-->
+  <button @click="btnClick2">按钮五</button>
+<!--  这时它会传递一个MouseEvent，它就把event传递过来了-->
+<!--一旦在我们界面上进行一些操作的时候，浏览器会自动生成一个对象，
+这个对象就是一个event对象 我们将写在方法里接收的值也换成event这样浏览器会自动将
+我们的event传递到方法里去-->
+<!--3.在方法定义时，我们需要event对象，同时又需要其他参数-->
+<!--  如果我们什么都不写的话会怎样？-->
+  <button @click="btnClick3">按钮六</button>
+<!--  Vue会自动给event的事件赋值给第一个参数，所以下面的abc变成了event，而event没人传
+东西就变成了undefined-->
+<!--   如果我们将参数写好后面的event直接写个evetn传递过来呢-->
+  <button @click="btnClick3(123,event)">按钮六</button>
+<!--  这样它会将我们写的event当成一个变量或者方法来进行传递，它就会在vue里找这个变量-->
+
+<!--  在调用方法时如何手动的获取到浏览器参数的event对象：$event-->
+  <button @click="btnClick3(123,$event)">按钮六</button>
+<!--我们要在括号里传递字符串的话一定要加单引号或者双引号，不然它会将它作为变量进行传递
+而不是一个值-->
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+    },
+    "methods":{
+      btnClick(){
+        console.log("你点击了按钮");
+      },
+      btnClick2(event){//但某些情况我们要拿到event这个对象式，这里的命名就要是event，
+        // 这样我们上面就可以直接省略小括号，将event 方法传递过来
+        console.log("你点击了--",event);
+      },
+      btnClick3(abc,event) {
+        console.log('+++++++++++++++',abc, event);
+      }
+
+    }
+ })
+
+  // 如果我们的函数需要参数但是我们没有传入，那么函数的形参为undefined
+  //  function abc(name){
+  //    console.log(name);
+  //  }
+  //   abc()
+
+
+</script>
+
+
+</body>
+</html>

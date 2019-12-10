@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--1. .stop修饰符的使用   （阻止冒泡）-->
+<!--如果我们的div同时监听这个点击-->
+<div @click="divClick">
+<!--  在div中建立一个按钮我们要监听这个按钮-->
+  div
+  <button @click="btnClick">按钮</button>
+</div>
+<!--  //这样的话两个事件都会被触发，（冒泡事件）如果我们并不想触发另一个事件该怎么办？
+当我们点击按钮时按钮的事件触发，点击div时div事件被触发，这时我们需要把按钮的事件冒泡阻止掉
+我们只需要使用我们的修饰符就能阻止了，如下：-->
+  <div @click="divClick">
+    <!--  在div中建立一个按钮我们要监听这个按钮-->
+    div
+<!--    我们只要在这里加上修饰符就能解决事件冒泡了-->
+    <button @click.stop="btnClick">按钮</button>
+  </div>
+
+<!--  2. .prevent修饰符的使用   （阻止默认事件）-->
+<!--我们这里定义一个form，需要从这向服务器递提交某些东西-->
+  <form action="baidu">
+<!--假如我们这里面有很多的input  然后在最后会定义一个submit，点击这个就会收集前面所有
+input里的数据然后提交到服务器  但有些情况下我们可能不希望它自动帮我们提交
+我可能希望能手动提交，当我点击这个按钮我希望能自己进行一些相关的监听的-->
+  <input type="submit" value="提交">
+<!--这里我们应该怎么写呢？   如果我们不希望这个自动进行提交的话我们就在这里加上.prevent
+通过我们的prevent阻止我们的默认事件-->
+    <input type="submit" value="提交" @Click.prevent="submitClick" >
+<!--加上prevent后我们点击提交就只有打印没有提交了，我们就可以自己去方法中收集数据
+自己进行提交了    我们也可以用这个阻止其他的默认事件-->
+</form>
+<!--  3.监听某个键盘的点击事件-->
+  <input type="text" @keyup="keyUp">
+<!--  键盘的点击事件我们就绑定我们的keyup就是当我们点击下按键再松开按键，按键起来的时候，
+还有个keydown也就是当键盘点击下去的时候-->
+<!--  也许在有些情况下我们只想监听一些特殊的按键，比如说回车  这要怎么做？-->
+  <input type="text" @keyup.enter="keyUp">
+<!--我们只需要在这里加上一个.enter这样就会监听我们的回车这一个键的点击-->
+
+<!--&lt;!&ndash;  4.自定义组件的点击事件&ndash;&gt;-->
+<!--<cpn @click="cpnClick"></cpn>-->
+<!--&lt;!&ndash;如果我们直接这样写，它是监听不到的  我们必须还得加上修饰符&ndash;&gt;-->
+<!--  <cpn @click.native="cpnClick"></cpn>  详细的以后会说-->
+<!--  5. .once修饰符的使用-->
+  <button @click="btnClick2">按钮2</button>
+<!--  如果我们希望我们的按钮只在第一次点击的时候有反应，之后就没有反应了，该怎么办？
+这个时候就能使用我们的once修饰符了-->
+  <button @click.once="btnClick2">按钮2</button>
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+    },
+    methods:{
+      btnClick(){
+        console.log('btnClick');
+      },
+      divClick(){
+        console.log('divClick');
+      },
+      submitClick(){
+        console.log('submitClick');
+      },
+      keyUp(){
+        console.log('keyup');
+      },
+      cpnClick(){
+        console.log('cpnClick');
+      },
+      btnClick2() {
+        console.log('btnClick2');
+      }
+
+    }
+ })
+</script>
+
+</body>
+</html>
