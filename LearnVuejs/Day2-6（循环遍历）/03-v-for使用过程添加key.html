@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <ul>
+
+    <li v-for="item in letters">{{item}}</li>
+  </ul>
+
+<!--  如果我们要在B和C之间插入一个F元素 要用splice-->
+<!--我们在控制台输入app.letters.splice(2,0,"F") 就能在B和C之间插入一个F元素了
+而splice第一个数代表的是从哪开始，第二个数是删除几个数，第三个就是插入的元素-->
+
+
+  <ul>
+    <!--     我们绑定的key要和展示的元素一一对应的   如果绑定index就不能保证一一对应-->
+    <li v-for="item in letters" :key="item" >{{item}}</li>
+<!--    以后我们要用v-for可以尽量绑定一个key这样可以加大程序内部的利用-->
+  </ul>
+
+
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+     letters:['A','B','C','D','E']
+    }
+ })
+</script>
+
+</body>
+</html>

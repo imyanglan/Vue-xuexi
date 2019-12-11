@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <ul>
+    <li v-for="item in letters"  >{{item}}</li>
+  </ul>
+
+  <button @click="btnClick">按钮</button>
+
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      letters:['a','b','c','d']
+    },
+    methods:{
+      // 并不是所有的方法都可以让我们页面做到响应式
+      btnClick(){
+        // 以下介绍的方法都是响应式的
+      //1.push方法
+      //this.letters.push('aaa')  这个方法是响应式的
+      //   this.letters.push('aaa','bbb','ccc'); 这个可以跟多个变量
+
+
+        // 2.pop方法:删除数组中的最后一个元素
+       // this.letters.pop();
+
+        // 3.shift():删除数组中的第一个元素
+        // this.letters.shift();
+
+        // 4.unshift():在数组最前面添加元素
+        // this.letters.unshift('aaa');
+        // 这里也可以追加多个 因为这里接收的值类型是可变参数
+
+        // 5.splice()作用：删除元素、插入元素、替换元素
+        // splice(start):start就是从哪个位置开始删除/插入/替换元素
+        // 如果你要删除元素：第二个参数表示你要删除几个元素
+        // this.letters.splice(1,)//如果你不传数会将数据全部删掉 但这里最好不要不赋值
+        // 如果你要替换元素
+        // this.letters.splice(1,3,'m','n','l') 你在第二个参数写要替换的个数，然后再
+        // 在后面传入你要替换的元素
+        // 插入:第二个参数就传入0，什么也不删什么也不改，后面就可以跟上要增加的元素
+        // this.letters.splice(1,0,'x','y','z')
+
+        // 6.sort：排序
+        // this.letters.sort()
+
+        // 7.reverse():反转
+        // this.letters.reverse()
+
+      // 注意： 通过索引值修改数组中的元素  它不是响应式的
+      //   this.letters[0]='bbb'; 我们到页面使用这个方法的话，页面没有响应
+      //   所以以后我们要更改数组的时候最好别用这个方式，不然到时候改了值页面也不会响应
+      //   因为Vue没有监听这个方法，所以不管你怎么改它都不会帮你在页面上刷新我们的界面
+      //   如果我们要实现通过索引更改值要怎么办呢？
+      //   我们可以用上面说过的替换
+      //   this.letters.splice(1,3,'m','n','l')
+      //  也可以用这个Vue自带的一个方法 set(要修改的对象，索引值，修改后的值)
+      //   Vue.set()
+
+
+      },
+
+    }
+ })
+
+      //什么是可变参数? 我们在这里定义一个函数对一些数字进行相加
+  // // 我们定义一个函数对两个数字键进行相加
+  // function sum(num1,num2){
+  //   return num1+num2
+  // }
+  // //如果我们有新的需求是需要三个数字进行相加该怎么做？
+  // function sum(num1,num2,num3)
+  // {
+  //   return num1+num2+num3
+  // }
+  // 如果我们要十个数字进行相加难道我们这样写十个数字吗
+  // 这时我们有另一个方法  我们可以写这个函数
+//   function sum(...num){
+//
+//   }
+//   //当我们写这个函数的时候，可以在下面随便传几个值都是可以的 这个...num就是可变参数可以传入多个值
+// sum(20,30);
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  v-show虽然与v-if相似，但是通过以下使用我们就可以看出它们之间的区别-->
+  <h2 v-if="isShow">{{message}}</h2>
+<!--  v-if如果值是false的话上面这些包含v-if的元素就不会存在我们的DOM里面了
+如果改成true的话它会重新创建一个，所以如果用v-if的话，元素在DOM中就是一个被创建，删除的
+过程-->
+
+  <h2 v-show="isShow">{{message}}</h2>
+<!--而我们的v-show值是false的话，这些元素还是会在DOM里不过是给它加了行内样式
+display：none 仅仅是将它隐藏起来。当用v-show的话就是仅仅对元素的显示和隐藏-->
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+      isShow:true,
+    }
+ })
+</script>
+
+</body>
+</html>
