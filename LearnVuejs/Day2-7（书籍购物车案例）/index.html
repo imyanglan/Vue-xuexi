@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="style.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+<div id="app">
+<!--  判断books有没有长度-->
+  <div v-if="books.length">
+  <table>
+    <thead>
+    <tr>
+      <th></th>
+      <th>书籍名称</th>
+      <th>出版日期</th>
+      <th>价格</th>
+      <th>购买数量</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(item,index) in books">
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.date}}</td>
+<!-- 让价格保留两位小数 js里面有给某位数字保留两位小数 toFixed-->
+<!--<td>{{'￥'+item.price.toFixed(2)}}</td>-->
+<!--如果在这里拼接的话虽然可行，但后面还有计算总价格也需要这样拼接这样就看起来很麻烦
+我们可以直接在js里写一个方法，将这个格式进行一个封装，这样就可以重复利用了-->
+<!--      <td>{{getFinalPrice(item.price)}}</td>-->
+<!--      我们还可以使用过滤器  首先我们在Vue定义过滤器（去到main.js）
+我们的价格在这里使用过滤器比起方法会更加合适一点-->
+      <td>{{item.price | showPrice}}</td>
+      <td>
+<!--        监听加减按钮的点击   我们还要绑定一个disabled，因为我们要设置一个当书减到一
+我们不让这个按钮交互了 -->
+        <button @click="decrement(index)" :disabled="item.count<=1">-</button>
+        {{item.count}}
+        <button @click="increment(index)">+</button>
+      </td>
+      <td><button @click="deleteClick(index)" >移除</button></td>
+    </tr>
+    </tbody>
+  </table>
+<h2>总价格：{{totalPrice | showPrice}}</h2>
+  </div>
+
+  <h2 v-else>购物车为空</h2>
+
+
+</div>
+<script src="../js/vue.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
