@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  如果我们这里想实现双向绑定的话-->
+<input type="text" v-model="message">
+<!--  其实v-model相当于两个指令的结合-->
+<!--如果我们不通过v-model如何将message里的值绑定到input上？-->
+  <input type="text" :value="message">
+<!--  我们可以通过对value的绑定用之前学过的v-bind将message绑定到value里-->
+<!--  通过这样绑定我们就搞定了把数据绑定到界面上-->
+<!--如果我们要让页面上的input里的值实时绑定到message上面该怎么做-->
+<!--我们可以通过绑定一个事件来实现   input有个事件叫input用于动态监听我们用户输入的东西-->
+  <input type="text" :value="message" @input="valueChange">
+<!--获取event我们不用在这里也写个括号传个event过去，我们什么都不写，函数里写的话它会自动从
+页面中获取到event的-->
+<!--我们通过两个指令，就实习了v-model指令所实现的东西-->
+<!--有一个更简单的写法 我们也可以直接写在这里不通过函数-->
+<input type="text" :value="message" @input="message=$event.target.value">
+
+<h2>{{message}}</h2>
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+    },
+    methods:{
+      valueChange(event){//一旦我们监听到了用户正在我们上面的input里输入东西就会调用这个方法
+        //而我们怎样才能获取到我们input里的value值，通过这个函数绑定到message上呢？
+        //一旦在我们界面上产生一个事件的话，浏览器会生成一个event对象
+        //这个event对象里就包含了我们想要的信息 我们只需要在括号里写上event就可以接收过来了
+        // 我们只要传过来event 它里面有个target 在target里面有个value
+        // 而这个value就是我们的input里面最新的value了
+        this.message=event.target.value;
+      }
+    }
+ })
+</script>
+
+
+</body>
+</html>
