@@ -8,22 +8,37 @@
 
 
 <div id="app">
+
+<!--  <label for="male">-->
+<!--    <input type="radio" radio="male" name="sex" value="男"v-model="sex">男-->
+<!--  </label>-->
+<!--  <label for="female">-->
+<!--    <input type="radio" radio="female" name="sex"  value="女" v-model="sex" >女-->
+<!--  </label>-->
+<!--  给同样的name才能使这两个控件实现互斥-->
+<!--按照我们的选择，把value里的值绑定到我们sex变量里面 我们只要在v-model里绑定我们的sex-->
+  <h2>您选择的性别是：{{sex}}</h2>
+<!--还有一个小细节，一旦我们v-model绑定的是同一个变量，我们的name可以没有
+我们要想两个redio互斥就要赋值同一个name，但如果绑定的是同一个变量也能做到互斥
+所以这个时候我们就可以省略掉name了-->
   <label for="male">
-    <input type="radio" radio="male" name="sex" value="男"v-model="sex">男
+    <input type="radio" radio="male" value="男"v-model="sex" >男
   </label>
   <label for="female">
-    <input type="radio" radio="female" name="sex"  value="女" v-model="sex" >女
+    <input type="radio" radio="female"   value="女" v-model="sex" >女
   </label>
-<!--按照我们的选择，把value里的值绑定到我们sex变量里面 我们只要在v-model里绑定我们的sex-->
+
+
 </div>
 <script src="../js/vue.js"> </script>
 <script>
   const app=new Vue({
     el:'#app',
     data:{
-      sex:''
+      sex:''//如果需要页面一开始默认一个选项我们只要在这里绑定它的value值就行了
+      // 因为我们这是双向绑定
     }
- })
+  })
 </script>
 
 </body>

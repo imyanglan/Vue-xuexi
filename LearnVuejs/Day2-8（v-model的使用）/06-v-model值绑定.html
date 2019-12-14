@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  之前我们使用input的时候里面的value数据都是写死的，而在我们的真实开发中
+那些数据都是从网络上，数据库里，data中获取的动态数据，这时就要用到我们的值绑定了
+其实值绑定本质也就是我们的v-bind绑定了我们控件的value-->
+  <label :for="item"  v-for="item in originhHbbies" >
+<!--这里就算不讲for 和 id 绑定 点击字也还是能选中多选框的 不过最好绑定一下-->
+    <input type="checkbox" :value="item" :id="item" v-model="hobbies" >{{item}}
+  </label>
+<h2>{{hobbies}}</h2>
+</div>
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      // 建立一个data用来放原始数据
+      originhHbbies:['篮球','足球','排球','乒乓球','羽毛球','棒球','网球'],
+      // 建立一个变量来记录爱好
+      hobbies:[]
+    }
+  })
+</script>
+
+</body>
+</html>

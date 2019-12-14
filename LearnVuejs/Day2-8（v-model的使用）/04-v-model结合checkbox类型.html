@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  1.checkbox单选框   一般对应的是布尔类型-->
+  <label for="agree">
+<!--    首先我们来举单选框的例子-->
+    <input type="checkbox" id="agree" v-model="isAgree">同意协议
+  </label>
+  <h2>您选择的是：{{isAgree}}</h2>
+<!--这个选项一般用于前端判断的，如果同意了才能点击下一步的按钮-->
+<!--我这里就来做一个下一步的按钮-->
+<button :disabled="!isAgree">下一步</button>
+<!--  我们这里需要取反，因为当为true的时候disabled是禁用的意思所以按逻辑来说应该取反-->
+<!--我们使用disagled绑定刚刚单选框的绑定的变量，由变量内的布尔值决定按钮能否点击-->
+
+
+<!--  2.chekbox多选框    一般对应的是数组类型-->
+
+    <input type="checkbox" value="篮球" v-model="hobbies">篮球
+    <input type="checkbox" value="足球" v-model="hobbies" >足球
+    <input type="checkbox" value="羽毛球" v-model="hobbies" >羽毛球
+    <input type="checkbox" value="排球" v-model="hobbies" >排球
+    <input type="checkbox" value="棒球" v-model="hobbies" >棒球
+    <input type="checkbox" value="乒乓球" v-model="hobbies" >乒乓球
+  <h2>您的爱好是：{{hobbies}}</h2>
+</div>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      isAgree:false,
+      // 建立一个变量来记录爱好
+      hobbies:[]
+    }
+ })
+</script>
+
+</body>
+</html>
