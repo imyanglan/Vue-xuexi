@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+<!--  cinfo改成cInfo-->
+<!--  <cpn :cinfo="info"></cpn>-->
+
+<!--  <cpn :cInfo="info"></cpn>-->
+  <!--  在cpn里面不支持驼峰 v-bind不支持驼峰  这里必须做一个装换 c-info
+把驼峰的地方用- 做一个分割-->
+<!--  这时我们要写比较复杂的驼峰标识要转成这样的语法child-my-message 以-连接的语法 -->
+  <cpn :c-info="info" :child-my-message="message"></cpn>
+<!--  这样改好之后就可以使用了-->
+</div>
+
+<template id="cpn">
+<!--  <h2>{{cinfo}}</h2>-->
+<!--  <h2>{{cInfo}}</h2>-->
+<!--  <h2>{{childMyMessage}}</h2>-->
+<!--  在子组件里面有很多的标签的时候，它必须是包含一个根的-->
+<!--  在子组件代码比较多的时候外边一定要有一个东西把他们都包起来-->
+  <div>
+    <h2>{{cInfo}}</h2>
+<!--    我们定义一个比较复杂的变量名该怎么办呢-->
+    <h2>{{childMyMessage}}</h2>
+  </div>
+</template>
+
+<script src="../js/vue.js"> </script>
+<script>
+
+  const cpn={
+    template:'#cpn',
+    props:{
+
+      // cinfo:{
+      //   type:Object,
+      //   default(){
+      //     return {}
+      //   }
+      // }
+      // 如果我们这里用驼峰标识把 cinfo 改成 cInfo 上面引用的也要改
+      cInfo:{
+        type:Object,
+        default(){
+          return {}
+        }
+      },
+      // 当我们改成驼峰标识，我们会发现 什么数据都没有了会直接显示一个空对象
+      // 这就表示什么值都没有传过来  为什么没有传过来呢？这是因为在自定义控件里不支持驼峰
+      // 用比较复杂的驼峰标识用上面的格式进行转化 然后来这里读取这个变量
+      childMyMessage:{
+        type:String
+      }
+
+    }
+  }
+
+  const app=new Vue({
+    el:'#app',
+    data:{
+      info:{
+        name:'imyanglan',
+        age:18,
+      },
+      message:'你好啊'
+    },
+    components:{
+      cpn
+    }
+ })
+</script>
+
+</body>
+</html>

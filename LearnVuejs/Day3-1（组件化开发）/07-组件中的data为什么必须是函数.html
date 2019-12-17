@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <cpn></cpn>
+<!--当我们建立好组件，如果要多次调用的话 比如我们又调用了两次-->
+  <cpn></cpn>
+  <cpn></cpn>
+<!--  我们这三个组件针对于我们的程序来说是三个组件实例对象  这三个组件实例有没有共享
+同一个data对象？  没共享，因为data是一个函数。我们在调用这个函数的时候会return一个新
+的对象-->
+
+
+</div>
+
+<template id="cpn">
+  <div>
+    <h2>当前计数：{{counter}}</h2>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+<!--组件里的方法写到哪呢？还是写在组件里面，组件有组件的变量，组件有组件的方法
+写到Vue里面是组件是找不到的-->
+  </div>
+</template>
+
+
+<script src="../js/vue.js"> </script>
+<script>
+  // 为什么Vue在设计的时候一定要设计成组件里面data必须是一个函数，如果不是一个函数的话
+  // 它可能会造成什么问题？
+
+  // 1.注册组件（计数器）
+  Vue.component('cpn',{
+    template:'#cpn',
+    data(){
+      // 如果我们组件的data写成对象形式直接就会报错  因为如果用对象的话它会出现如果
+      // 多次调用组件会出现连锁反应而不会一个个独立出来，如果写成函数它会分别创建
+      // 多次调用每次都会创建一个新的对象，而互不干涉
+      return{
+        counter:0
+      }
+    },
+    // 组件必须要有一个自己的保存对象的实例
+    // 在组件里定义方法
+    methods:{
+      increment(){
+        return this.counter++
+      },
+      decrement(){
+        return this.counter--
+      }
+    }
+  })
+
+  const app=new Vue({
+    el:'#app',
+    data:{
+    }
+ })
+</script>
+
+<!--如果不用函数会造成什么问题？-->
+<script>
+
+  // 如果我们换一种写法  第二种写法
+  const obj={
+    name:'imyanglan',
+    age:18
+  }
+  // 首先这个obj它本质上其实是一个内存地址
+
+  // 第一种写法
+  //假如说我们现在有个函数叫abc
+  function abc() {
+
+    // return{
+    //   // 这个函数return一个对象 第一种写法
+    //   name:'imyanglan',
+    //   age:18
+    // }
+
+
+    // 我们这里返回obj  第二种写法  当我们以函数的形式返回这个对象的时候
+    // 其实本质返回的是内存地址  所以别人一旦调用这里拿到的就是内存地址
+    return obj
+  }
+
+  // 我现在想调用三次这个函数
+ let obj1= abc()
+ let obj2= abc()
+ let obj3= abc()
+  // 现在的问题是obj1和obj2和obj3是不是同一个对象？    肯定不是
+  // 因为函数它在每次执行的时候都会在自己的栈空间里面创建一些很多新的一些变量
+  // 所以上面三个变量不是同一个东西   它们的内存地址都不一样
+  // 我们要怎样验证呢？我们可以把obj1 里的对象改一下，然后查看obj2和obj3有没有变化
+  // 如果它们用的是同一个对象，那么其他两个也会跟着改变
+  obj1.name='soda'
+  console.log(obj2);
+  console.log(obj3);
+  // 我们到页面上运行会发现其他两个还是之前的数据没有发生改变
+  // 这就说明它们不是用的同一个对象
+
+// 以第二种方式调用会是同一个对象
+// 因为在每次调用的时候用的都是obj这一个对象，而这个对象永远是指向上面那obj对象定义的name和age
+  // 而不是重新创建的一个对象然后里面写入name和age
+  //这两种方式 一个是引用一个是创建 引用就会造成对它的更改都是同一个对象而不是各个独立的
+  // 所以上面的data在用的时候不能再作为对象使用而是一个函数  函数返回的就是一个新的对象
+
+
+</script>
+
+</body>
+</html>
