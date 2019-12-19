@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  <cpn :number1="num1" :number2="num2"></cpn>-->
+<!--  这里也可以使用单标签-->
+  <cpn :number1="num1" :number2="num2" @num1change="num1change" @num2change="num2change" />
+</div>
+
+
+<template id="cpn">
+  <div>
+    <h2>props:{{number1}}</h2>
+    <h2>data:{{dnumber1}}</h2>
+<!--    如果我们想在这里建立个input通过v-model双向绑定更改number1的值-->
+    <input type="text" v-model="number1">
+<!--    我们的v-model现在是绑定到props（组件）里的number1的数据  绑定了之后
+在页面运行我们会发现我们能双向绑定改变值但报了一个错  大意是props（属性）的修改
+是由父组件来对它进行重写，避免直接通过子组件来改变props里的值-->
+    <h2>props:{{number2}}</h2>
+    <h2>data:{{dnumber2}}</h2>
+    <input type="text" v-model="dnumber2">
+<!-- 所以当我们确实需要双向绑定来改变里面的值的时候不要绑定到props里而是通过
+在components里用我们的data或者计算属性-->
+
+<!--而我们还需要将这个改变值传到我们的父组件里面把这个num1和num2也改变-->
+    <h2>props:{{number1}}</h2>
+    <h2>data:{{dnumber1}}</h2>
+    <input type="text" v-model="dnumber1" @input="number1input">
+
+    <h2>props:{{number2}}</h2>
+    <h2>data:{{dnumber2}}</h2>
+<!-- 我们把v-model的本质拆开 就变成了绑定value值的input 还监听input改变值的事件-->
+    <input type="text" :value="dnumber2" @input="number2input">
+
+  </div>
+</template>
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      num1:1,
+      num2:0
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        props:{
+          number1:Number,
+          number2:Number
+        },
+        data(){
+          return{
+            // 根据我们props里面的number1，number2来初始化data里面的的number1，dnumber2
+            dnumber1:this.number1,
+            dnumber2:this.number2
+            // 等初始化完之后，上面的v-model绑定就绑定到这里面 就不会报错了
+          }
+        },
+        methods:{
+
+            // 1.将input中的value赋值到dnumber中
+            number1input(event){
+              this.dnumber1=event.target.value;
+              // 2.为了让父组件可以修改值，发出一个事件
+              this.$emit('num1change',this.dnumber1)
+              // 3.同时修改dnumber2的值
+              this.dnumber2=this.dnumber1*100;
+              // 修改的同时需要props里的值也发生改变 就要发射一个事件给父组件
+              this.$emit('num2change',this.dnumber2)
+          },
+          number2input(event){
+            this.dnumber2=event.target.value;
+            // 然后我们将值返回提交给父组件
+            this.$emit('num2change',this.dnumber2)
+            this.dnumber1=this.dnumber2/100;
+            this.$emit('num1change',this.dnumber1)
+          }
+        }
+
+
+      },
+    },
+    methods:{
+      num1change(value){
+        // 默认情况下这里传入的都是String类型
+        // 然后用方法将它转成数字类型
+        this.num1= parseInt(value)
+      },
+      num2change(value){
+        // 默认情况下这里传入的都是String类型
+        // 然后用方法将它转成数字类型
+        this.num2= parseInt(value)
+      }
+    }
+ })
+</script>
+
+</body>
+</html>

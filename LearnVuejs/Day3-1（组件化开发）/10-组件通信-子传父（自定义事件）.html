@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!--父组件模板-->
+<div id="app">
+<!--  经历完下面的步骤之后 我们来这里监听子组件发射出来的事件 然后在后面写上对应方法对它做
+一些处理  cpnClick而这个方法就在父组件定义   ！注意这里不能写驼峰标识！
+我们这里传递了参数但是我们没有写，因为它会默认将我们下面定义的item参数传递过去-->
+<cpn @item-click="cpnClick"></cpn>
+</div>
+
+<!--子组件模板-->
+<template id="cpn">
+  <div>
+<!--    当我们某一个类别发生点击的时候，需要告诉父组件我们点击了谁，父组件再根据点击了谁
+去请求对应的数据  这个时候我们就要去监听我们按钮的点击了-->
+    <button v-for="item in categories"
+            @click="btnClick(item)" >
+      {{item.name}}
+    </button>
+  </div>
+</template>
+
+<script src="../js/vue.js"> </script>
+<script>
+// 1.子组件
+  const cpn={
+    template:'#cpn',
+    data(){
+      return {
+        // category:分类/类别
+        categories:[
+            // 类别可以定义很多东西  这里可以定义一个id 到时候就把id传递给服务器就行了
+            // 不需要传具体的名字的
+          {id:'aaa',name:'热门推荐'},
+          {id:'bbb',name:'手机数码'},
+          {id:'ccc',name:'家用家电'},
+          {id:'ddd',name:'电脑办公'},
+        ]
+      }
+    },
+    methods:{
+      // 我们要把这个点击了谁告诉给父组件
+      btnClick(item){
+        // 要把这个item传过去给父组件   我们应该怎么传？ 它是通过自定义事件 来传递的
+        // 我们应该这样传   这里要写个this.$emit()它是通过这个东西传的   emit：发射
+        // 它要发射出去一个事件  发射出什么事件呢？我们可以自己取名字 不要用驼峰标识
+        this.$emit('item-click',item)
+        // 我们可以发射一个事件item-click 这个是事件的名称 同时我们后面可以跟一个参数item
+        // 这就是我们事件传过去带的参数
+        // 父组件负责接收这个事件  我们还要在父组件模板上自定义控件里面监听这个事件
+      }
+    }
+  }
+
+// 2.父组件
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊',
+    },
+    components:{
+      cpn
+    },
+    methods:{
+      // 然后我们要在这里接收我们子组件传过来的参数
+      cpnClick(item){
+        console.log(item);
+        // 这就是通过自定义事件由子组件向父组件传递东西
+      }
+    }
+ })
+</script>
+
+</body>
+</html>
