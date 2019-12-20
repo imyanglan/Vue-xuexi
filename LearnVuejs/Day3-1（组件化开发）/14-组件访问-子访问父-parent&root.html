@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <cpn></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <ccpn></ccpn>
+  </div>
+</template>
+
+<template id="ccpn">
+  <div>
+    <h2>我是子组件</h2>
+    <button @click="btnClick">按钮</button>
+  </div>
+
+</template>
+
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      message:'你好啊'
+    },
+    // 这是子组件  这是根组件下的一级子组件 （根组件的子组件）
+    components:{
+      cpn:{
+        template:'#cpn',
+        data(){
+          return{
+            // 我们在中间这一层的子组件定义一个属性
+            name:'我是cpn组件的name'
+          }
+        },
+        // 嵌套有点多看清楚他们的地方  这是最小的子组件（子组件的子组件）
+        components: {
+          ccpn:{
+            template:'#ccpn',
+            methods:{
+              btnClick(){
+                // 我们要在这里访问父组件
+                // 1.访问父组件 $parent
+                // console.log(this.$parent);
+                // // 然后我们在这里调用我们的的方法  相当于拿到我们的父组件直接访问它的name
+                // console.log(this.$parent.name);
+
+                // 但是这个方法在开发中用的比较少  因为这样使用的话我们的子组件就不够独立了
+                // 在开发过程中我们会把一些小东西抽成一个一个的组件  抽成组件最主要的目的
+                // 就是为了方便复用  一方面是以组件化的方式开发我们的环境 一方面是因为复用性
+                // 因为如果复用这个组件的话 它要找的组件里没有name属性的话程序就会报错
+                // 所以这样的话它的子组件复用性就不高 它和父组件之间的耦合度太高了
+
+
+                // 2.访问根组件 $root   可直接访问我们的根组件
+                console.log(this.$root);
+                console.log(this.$root.message);
+               // 但这个也用的比较少，因为我们开发中很少会在Vue实例里放东西
+               // 它只会放一些重要的东西，比如说我们的路由之类的 会放在我们的Vue实例中
+               //  但像这种基本的属性不会往实例中存放
+
+              }
+            },
+
+
+          }
+
+        }
+
+      }
+    }
+
+ })
+</script>
+
+</body>
+</html>

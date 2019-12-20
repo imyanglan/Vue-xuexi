@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Title</title>
+    </head>
+<body>
+
+
+<div id="app">
+ <cpn>
+<!--   如果我们要改中间的  我们直接写一个元素，不加以修饰的话它会将里面所有的插槽都替换成这个
+元素 如果我们只想改某一个另外的都不想更改该怎么做？  这个时候我们就需要给插槽起名字了 因为
+只有有了名字它们之间才会区分  当我们给这个标签-->
+   <span>标签</span>
+<!--当我们将每个插槽都定义了名称之后就会发现上面这个标签就没有去替换了  因为这样写它只会
+默认替换那些没有命名的插槽 你要想替换有名字的插槽 就必须在使用这些标签的时候也给它们定义
+和插槽一样的名字 如下-->
+   <span slot="center">标签</span>
+<!-- 这样它就会知道自己要替换哪一个插槽了-->
+<!--   所以说如果你要告诉你要替换哪一个插槽就必须给插槽命名且调用这个组件的时候也得给它指定到
+你要替换的插槽名称 这就是具名插槽的使用-->
+ </cpn>
+</div>
+
+<template id="cpn">
+  <div>
+<!--  如果我们遇到这样一种情况，一个组件中有多个需要多个插槽该咋办  我们先定义三个插槽
+分别给它们定义一个默认值-->
+    <slot name="left"><span>左边</span></slot>
+    <slot name="center"><span>中间</span></slot>
+    <slot name="right"><span>右边</span></slot>
+<!--如果我们遇到的情况是只需要改中间的插槽该怎么办？-->
+  </div>
+</template>
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+    },
+    components:{
+      cpn:{
+        template:'#cpn'
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

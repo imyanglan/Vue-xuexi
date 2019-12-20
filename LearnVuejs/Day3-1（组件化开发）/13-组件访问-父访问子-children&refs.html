@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  2.我们用refs的方法  需要在组件上加属性 这就相当于子组件的key-->
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn ref="cpn3"></cpn>
+<!--如果我们有多个子组件对象的话 我们点击按钮就会有多个子组件对象 这些子组件都是可以通过
+$children这个方法拿到的，它都会把这些方法放在数组里面，然后再通过数组来拿我们的子组件里面
+的一些方法甚至还可以拿我们子组件里面的一些属性-->
+  <button @click="btnClick">按钮</button>
+</div>
+
+
+<template id="cpn">
+  <div>我是子组件</div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+
+    },
+    methods:{
+      btnClick(){
+        // 1.$children
+        // 现在就希望在Vue实例里访问我们的子组件  这个时候通过$children来访问
+        // 我们给这个打印一下去浏览器看一下是什么的东西
+        console.log(this.$children);
+        // 我们切换开发者模式点击按钮的话就会看到很多的方法 而且还能找到我们在子组件定义的
+        // showMessage方法  于是我们要怎样引用到我们子组件里的方法呢？
+        this.$children[0].showMessage()
+        // 我们可以通过以上方法来调用我们的子组件里的方法是没有问题的
+        // 而且还能调用子组件里的属性
+        this.$children[0].name
+
+        // 如果我们要调用多个的话
+        // for (let c of this.$children)
+        // {
+        //   console.log(c.name);
+        //   c.showMessage();
+        // }
+        // 这是我们的$children的方法  但是我们真实开发中是不会这样做的 我们会用另一个方法
+        // 因为真实的开发中需求不可能一成不变  如果我们用数组的方式，万一子组件的顺序出现了
+        // 些许改变 如果用这个方法肯定是不行的，因为下标也会变，我们不能用这种死的方法这样
+        // 获取子组件，前面改了这里也要改，既麻烦又容易出问题 所以这个方法用的比较少
+        // 而我们一般用另一个属性
+
+        // 2.$refs ->对象类型  这个默认情况下是一个空的对象   我们必须在组件上给它加属性才能调用
+        console.log(this.$refs.cpn3.showMessage());
+        // 我们在后面.cpn3就是给刚刚子组件赋值的属性名 通过就能直接找到那个子组件了
+        // 而且也不用担心会之后位置出现变动就找不到这个子组件了，这就类似于id每个人
+        // 只能拥有一个且不能相同，这样就能根据这个来找它了
+
+      }
+    },
+    // 注册组件
+    components:{
+      cpn:{
+        template:'#cpn',
+        methods:{
+          showMessage(){
+            console.log('showMessage');
+          }
+        },
+        data(){
+          return{
+            // 我们写一个属性
+            name:'我是子组件的name'
+          }
+        }
+      }
+    }
+
+ })
+</script>
+
+</body>
+</html>
