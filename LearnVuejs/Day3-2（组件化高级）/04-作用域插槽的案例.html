@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+<!--  第一次我们以ul li 的形式显示我们的数组-->
+  <cpn></cpn>
+<!--如果第二次展示不希望还以上面的方式进行展示   用另一种形式，以-进行分割 水平显示在一行
+该怎么做？  这里就要用到我们的插槽-->
+  <cpn>
+<!--  我们要在这里重新编辑新的样式的话 不能直接引用到子组件里的变量，因为上一节说的作用域
+这里只能访问到Vue实例的变量，而访问不了子组件的变量  所以这里我们不能像子组件一样调用它
+这个时候我们需要子组件里的数据pLanguages 所以要想办法将数据传到父组件里来 首先我们要到
+子组件里的slot里定义一个属性 -->
+<!--    而定义好了属性且将它指向了对应的数据后 我们要在这使用的话得先定义一个template模板
+因为为了拿到那里面的数据这里必须得有一个template  在Vue2.5.X 以上这里不用template模板也行
+可以用其他模板，例如div等等  然后我们通过这个模板来拿子组件里定义的:data   怎么拿？
+ 在模板里写上 slot-scope这是固定的然后在后面写上名字slot然后根据这个slot引用下面的插槽对象-->
+    <template slot-scope="slot">
+<!--然后在这里面我们就可以这样做了  我们要在这里拿pLanguages 怎样拿呢？我们这里有个slot
+引用了这个插槽对象 所以我们直接通过slot.data就可以把我们下面定义的data给引用进来了
+我们在这里.出来的data就是在子组件里传出的那个:data-->
+      <span v-for="item in slot.data">{{item}} - </span>
+    </template>
+  </cpn>
+
+  <cpn>
+<!--通过作用域插槽的方式 拿到子组件的数据 交给父组件遍历-->
+<!--    现在已经将v-slot替换slot-scope了   而2.5之前的版本是scope -->
+    <template v-slot="slot">
+      <!--运行后我们发现后面总多一个-有什么方法可以将它去掉呢？ 这里我们可以用一个函数实现 join函数
+ 它可以把我们的数组转成字符串并且多个数组元素直接可以以一个东西作为它的连接 -->
+      <span>{{slot.data.join(' - ')}}</span>
+    </template>
+  </cpn>
+
+</div>
+
+<template id="cpn">
+  <div>
+<!-- 第一我们在slot里面定义一个属性  这里的data是随便起的  我们可以自定义属性的名字
+然后将这个属性指向我们需要的数据pLanguages 之后就可以在上面用它了-->
+    <slot :data="pLanguages">
+<!--    把这个代码放在插槽里，在别人没有写的时候默认以插槽里的这种形式进行展示-->
+      <ul>
+        <li v-for="item in pLanguages">{{item}}</li>
+      </ul>
+    </slot>
+  </div>
+</template>
+
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        data(){
+          return{
+            pLanguages:['JavaScript','C++','Java','C#','Python','Go','Swift']
+          }
+        }
+      }
+
+    }
+ })
+</script>
+
+</body>
+</html>

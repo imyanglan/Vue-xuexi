@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <!--  我们在实例和组件中懂定义了一个isShow，请问这样的话这里引用的是哪个里面的isShow-->
+<cpn v-show="isShow"></cpn>
+<!--答案是实例里的isShow 我们通过控制实例里的isShow就能决定改子组件显不显示
+这就是我们作用域的概念 因为它在查找我们这些变量的时候它都是先看一下我们的这个变量是在哪个模板里
+ 面的，它不会看你用的是哪个组件 它把这个组件还是当做一个最普通的div 它在使用这些变量的时候
+ 它都会看一下是在哪个模板里面 而当前这个就是在我们Vue实例的模板里面 所以它里面的变量就直接
+ 去我们Vue实例里面找而不是去组件里面找 这个就是作用域-->
+</div>
+
+<template id="cpn">
+  <div>
+    <h2>我是子组件</h2>
+    <p>我是内容</p>
+<!-- 按上述的作用域的概念 如果我们在这写个按钮且绑定isShow这个变量 这个按钮还会显示出来吗-->
+    <button v-show="isShow"></button>
+<!--    答案是：不能！ 因为这里的子组件的模板 也就是在子组件的作用域里 子组件里定义的isShow是
+false所以这里的按钮不能显示出来-->
+  </div>
+</template>
+<!--这就是编译的作用域 我们也不能跨作用域来编译-->
+<script src="../js/vue.js"> </script>
+<script>
+  const app=new Vue({
+    el:'#app',
+    data:{
+      isShow:true
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        data(){
+          return{
+            isShow:false
+          }
+        }
+      }
+    }
+
+
+ })
+</script>
+
+</body>
+</html>
