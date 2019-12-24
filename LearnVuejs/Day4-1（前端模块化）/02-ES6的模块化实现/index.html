@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!--我们用ES6实现模块化要怎样做避免命名冲突呢？在里面加上type="module"就不会有命名冲突的问题了-->
+<script src="xiaoming.js" type="module"></script>
+<script src="xiaohong.js" type="module"></script>
+<!--然后我们使用这两个文件的时候是按照模块化的思想来使用的 一旦按照模块化的思想来使用
+意味着这两个文件就是一个单独的模块 单独的模块有自己单独的作用域 所以别的地方再有相同的名字的
+时候就不会有冲突了  但是如果另一个文件中需要复用了该怎么办呢？-->
+<!--因为我们是以模块化的方式开发的所以这里都得按照统一的规范-->
+<!--一旦我们的每一个js都加上type="module" 里面的全局变量就不是全局变量了都是局部变量了-->
+<script src="xiaoming2.js" type="module"></script>
+</body>
+</html>
