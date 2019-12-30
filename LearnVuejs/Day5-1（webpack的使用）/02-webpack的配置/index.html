@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!--我们开发的时候就会这样开发-->
+<!--用src装js源码对index.html界面进行操作-->
+<!--当要发布的时候我们也要将这个页面放到dist文件夹里打包进行发布，
+之后我们就会通过一个工具想办法将这个页面放入到dist文件夹里，我们会通过一个工具自动生成一个
+这个页面的，在开发阶段的话我们可以先这样做  但是这样做很多东西也不好测试-->
+
+<!--第一步我们现在src文件夹里创建一个js文件main作为入口  而在这个文件夹里创建的js我们都要以
+模块化的方式来做  那种模块化都行 commonJS、AMD、CMD、ES6 你选择任何一个都可以
+接下来我们就在建立一个数学的工具类的js文件 mathUtils.js 我们在里面定义函数-->
+<!--当我们在这个js文件里用模块化的思想写好代码且引用到main.js中引用了  这个时候我们没有引用这
+两个文件要怎样测试呢？  因为mathUtils.js含有commonJS的代码直接引用过来浏览器无法识别
+所以你直接引用过来也没用，引用过来浏览器肯定报错 这个时候该怎么做呢？这就可以用我们刚刚安装的
+webpack对mathUtils.js进行打包  我们只要打包出来一个浏览器能认识的文件  然后在这里引用那个
+文件就行了-->
+<!--所以我们开发的时候就可以按commonJS的规范去开发就行 之后我们就只要做一件事情 打包一下
+到时候我们webpack会自动去帮我们处理我们模块之间相互的依赖之类的东西 处理完了之后它最终会
+生成一个js文件 我们这里只需要去用这个js文件就行了-->
+
+<!--我们在终端里打开这个文件夹  按我们自己的命名写入这些代码
+>webpack ./"src(源码-开发的东西都放这里)"/main.js ./dist（distribution-发布-打包的东西都放这里）/bundle.js
+按下回车
+如果我们看见
+Hash: 809e59c79366c37ef57e
+Version: webpack 3.6.0
+Time: 107ms
+    Asset     Size  Chunks             Chunk Names
+bundle.js  2.97 kB       0  [emitted]  main
+   [0] ./src(源码-开发的东西都放这里)/main.js 168 bytes {0} [built]
+   [1] ./src(源码-开发的东西都放这里)/mathUtils.js 248 bytes {0} [built]
+
+这样一层打印的话
+就完成打包了-->
+<!--我们现在就可以之间引用我们打包好的文件就可以了-->
+<script src="./dist（distribution-发布-打包的东西都放这里）/bundle.js"></script>
+<!--然后发布的话就是将这个html文件和我们绑定的这个js文件发送给服务器就行了-->
+
+<!--之后我们在建立一个js文件用ES6的模块化方法  info.js-->
+
+
+</body>
+</html>
