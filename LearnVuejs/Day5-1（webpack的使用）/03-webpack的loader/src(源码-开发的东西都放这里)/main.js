@@ -23,3 +23,8 @@ require('./css/normal.css')
 // 这里我们也不需要写变量，我们在上面写变量的原因是之后要用到，而样式我们只需要依赖就行了
 // 如果我们直接打包的话，会报错，因为webpack不能直接对css文件进行解析，我们需要通过合适的loader
 // 对该文件进行处理  我们去到官网里可以直接看如何使用合适的loader
+
+// 4.依赖less文件
+require('./css/special.less')
+document.writeln('<h2>你好啊，less</h2>')
+// 动态写入html
