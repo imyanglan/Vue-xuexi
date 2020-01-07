@@ -59,7 +59,27 @@ module.exports={
             // hash:8 是为了防止图片同名 ext就是扩展名
 
           }
-        ]}
+        ]},
+
+      {
+        test: /\.js$/,
+        //exclude:排除
+        //include:包含
+        exclude: /(node_modules|bower_components)/,
+        // 这里就是表示node_modules这个文件夹里的东西
+        // 和bower_components这个文件夹里的东西不用转化
+        use: {
+          loader: 'babel-loader',
+          options: {
+            // 这是配置 就我们刚刚安装的时候最后那一行的配置
+            // presets: ['@babel/preset-env']
+            // 这里的配置我们不用官网里的默认配置而是我们刚刚装的那个
+            presets: ['es2015']
+
+          }
+        }
+      }
+
     ]
   }
   // 将这几行代码从文档中复制过来就行了
