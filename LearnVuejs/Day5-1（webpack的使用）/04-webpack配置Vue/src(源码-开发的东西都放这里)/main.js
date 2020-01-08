@@ -32,10 +32,47 @@ document.writeln('<h2>你好啊，less</h2>')
 
 // 5.使用Vue进行开发
 import Vue from 'vue'
+//重新在这里调用我们的vue文件
+import App from './vue/App.vue'
+// 这里我们还要配置对应的loader，不然会报错因为它不知道怎样解析这个文件
+
+
+
+// 将关于APP这个组件的代码都封装在一个文件里然后导入它就可以了
+// import App from './vue/APP'
+
+//我们创建一个叫APP的一个组件  之后对应的是一个对象 我们在里面定义一个template对象
+// 然后把下面的template拿到这里面来  我们就把下面template的东西抽到这里面来了
+// 我们可以将所有这些东西都抽到这个组件里面
+// const App={
+//   template:`
+//   <div>
+//     <h2>{{message}}</h2>
+//     <button @click="btnClick">按钮</button>
+//     <p>{{name}}</p>
+//   </div>
+//   `,
+//   data(){
+//     return{
+//       message:'Hello World',
+//       name:'imyanglan'
+//     }
+//   },
+//   // 包括按钮的点击事件
+//   methods:{
+//     btnClick(){
+//
+//     }
+//   }
+// }
 // 使用之前我们得先依赖
 new Vue({
   el:'#app',
-  data:{
-    message:'Hello World'
+  // 一旦我们在这里同时定义了le和template  到时候这个template里所有的东西 Vue内部在编译的时候
+  // 会复制到我们index.html页面中el绑定#app的那个div那边 将它替换掉
+  template:'<App/>',//注册完了之后我们就在这里使用就行了，这就像是引用我们注册的子组件
+  // 而我们在这里需要做的就是将组件注册
+  components:{
+    App
   }
 })
