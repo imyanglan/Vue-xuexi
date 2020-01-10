@@ -76,7 +76,7 @@ module.exports={
           }
         }
       },
-
+        // 增加我们的vue的配置文件
       {
         test: /\.vue$/,
         use:['vue-loader']

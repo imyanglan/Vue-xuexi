@@ -36,8 +36,6 @@ import Vue from 'vue'
 import App from './vue/App.vue'
 // 这里我们还要配置对应的loader，不然会报错因为它不知道怎样解析这个文件
 
-
-
 // 将关于APP这个组件的代码都封装在一个文件里然后导入它就可以了
 // import App from './vue/APP'
 
