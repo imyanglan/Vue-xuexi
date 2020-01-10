@@ -86,6 +86,13 @@ module.exports={
   },
   // 将这几行代码从文档中复制过来就行了
   resolve:{
+    // extensions：解决
+    // 在这里加一个配置就能让.vue等这些文件进行简写调用了
+    extensions:['.js','.vue','css'],
+    // 在extensions后面跟个数组，以后你有什么文件想省略直接在里面写
+    // 该文件的扩展名就行了
+    // 这样回到我们刚刚的位置将那个vue文件后面的.vue省略
+
     // alias:别名
     alias:{
       'vue$':'vue/dist/vue.esm.js'
