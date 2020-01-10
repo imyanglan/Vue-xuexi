@@ -704,7 +704,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Cpn_vue__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Cpn__ = __webpack_require__(17);
 //
 //
 //
@@ -719,12 +719,13 @@ module.exports = function normalizeComponent (
 
 // 引用我们新创建的Cpn组件
 
-// 注意：这里的.vue不能简写，不然会报错，之后再说这里如何让vue简写不报错
+// 注意：这里的.vue不能简写，不然会报错，
+// 这里如何让vue简写不报错 这需要到webpack.config.js里配置
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: "App",
   // 在这里对这个组件进行注册
   components: {
-    Cpn: __WEBPACK_IMPORTED_MODULE_0__Cpn_vue__["a" /* default */]
+    Cpn: __WEBPACK_IMPORTED_MODULE_0__Cpn__["a" /* default */]
     // 这样就有了依赖关系，也是组件间的套用
   },
   data() {
@@ -13478,7 +13479,7 @@ if(false) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(0);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 // Exports
 module.exports = exports;
 
