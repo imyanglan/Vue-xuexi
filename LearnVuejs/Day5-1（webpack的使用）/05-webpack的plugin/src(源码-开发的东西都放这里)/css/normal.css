@@ -1,0 +1,7 @@
+body{
+  /*background-color: red;*/
+  background-image: url("../../../img/WQF.jpg");
+  /*当我们打包时这里如果我们引用了图片这边也会将图片当做一个模块来加载的
+  我们如果直接打包是会报错的 它不能正确的加载出来是因为需要一个合适的loader去处理
+  这个图片文件*/
+}
