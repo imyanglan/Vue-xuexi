@@ -115,11 +115,13 @@ module.exports={
   plugins:[
     new webpack.BannerPlugin('最终版权归imyanglan所有'),
     // 来到这个位置引用上面导入进来的插件就行了
-    // 如何使打包的html文件使用模板呢？
-    new HtmlWebpackPlugin(
-        // 在这里面传入一个参数
 
-    )
+    // 如何使打包的html文件使用模板呢？
+    new HtmlWebpackPlugin({
+        // 在这里面传入一个参数
+        template:'index.html'
+      // 这个就是我们要打包的那个html文件  用它作为模板
+    })
   ]
 
 
