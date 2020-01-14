@@ -4,6 +4,10 @@ const webpack=require('webpack')
 // 当我们这样导入的时候它会来我们的node_modules来找我们的东西的
 const HtmlWebpackPlugin=require('html-webpack-plugin')
 //在这里导入我们刚刚安装的插件   在这里给它引入
+const UglifyjsWebpackPlugin=require('uglifyjs-webpack-plugin')
+// 在这里导入我们用来压缩的插件
+
+
 
 module.exports={
   entry:'./src(源码-开发的东西都放这里)/main.js',
@@ -121,7 +125,9 @@ module.exports={
         // 在这里面传入一个参数
         template:'index.html'
       // 这个就是我们要打包的那个html文件  用它作为模板
-    })
+    }),
+      // 同样在这里使用 就可以了
+      new UglifyjsWebpackPlugin()
   ]
 
 
