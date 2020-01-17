@@ -3,7 +3,12 @@ root = true
 [*]
 charset = utf-8
 indent_style = space
+# 缩进的风格  使用空格
 indent_size = 2
+# 缩进的size是两个空格
 end_of_line = lf
+# 最后一行做一个换行  lf换行符——每个操作系统里可能都不一样
 insert_final_newline = true
+# 在每个代码的最后一行里再建一个新的空行
 trim_trailing_whitespace = true
+# 删除多余的空格
