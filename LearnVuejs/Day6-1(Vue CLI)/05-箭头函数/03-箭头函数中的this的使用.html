@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script>
+  // 什么时候使用箭头函数
+  // 像我们定义一些普通的函数的时候，我们用这些箭头函数用的并不多
+  // 一般是在哪里用的是最多呢？
+  // 就是当我们准备把一个函数作为一个参数传到另一个函数里面的时候
+  // 像我们以前写过一个这样的代码
+  setTimeout(function () {
+
+  },1000)
+  // 以后我们就可以不用这样写了 我们直接写个箭头函数
+  // setTimeout(() => {
+  //
+  // })
+  // 因为箭头函数看起来更简洁一些
+  // 但使用箭头函数有可能你会在使用this的时候发生一些乱七八糟的问题
+  // 假如说我们在上面这个函数中打印一个this
+  // setTimeout(function () {
+  //   console.log(this);
+  // },1000)
+  // // 这个this打印的出来是window
+  // setTimeout(() => {
+  //   console.log(this)
+  // },1000)
+  // 这个this打印的出来也是window
+
+  // 然后我们在对象里面写一个函数
+
+  // 结论:箭头函数的中的this是如何查找的呢?
+  // 向外层作用域中,一层层查找this,直到有this的定义
+  // 而上面那个函数在调用的时候是通过call,而它会把window作为第一个参数传进来
+  // 而箭头函数里是没有this这个关键字的,所以在这里引用得向外查找
+  // 所以就需要向外找一层作用域  这样找的就是aaa这个函数的作用域了
+  // this的指向就是调用该函数的对象
+  // 所以aaa函数是有this的定义,因为它在一个对象中
+  // 所以aaa函数中this的指向就是obj
+
+// 这些里面的this都是指向谁?
+  const obj = {
+    aaa(){
+      setTimeout(function () {
+        setTimeout(function () {
+          console.log(this);//window
+        })
+
+        setTimeout(() => {
+          console.log(this);//window
+        })
+
+      })
+
+      setTimeout(() => {
+
+        setTimeout(function () {
+          console.log(this);//window
+        })
+
+        setTimeout(() => {
+          console.log(this);//obj
+        })
+      })
+      // 如果弄懂这个关系就基本上算理解了
+    }
+  }
+
+  obj.aaa()
+
+</script>
+
+
+</body>
+</html>
