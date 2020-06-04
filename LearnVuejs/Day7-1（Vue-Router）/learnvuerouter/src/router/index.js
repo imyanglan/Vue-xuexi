@@ -13,8 +13,14 @@ import Vue from 'vue'
 
 
 // 导入组件
-import Home from '../components/Home'
-import About from '../components/About'
+//这是之前的方式，如果我们要使用到路由懒加载
+// import Home from '../components/Home'
+// import About from '../components/About'
+// import User from '../components/User'
+
+const Home = ()=>import('../components/Home')
+const About = ()=>import('../components/About')
+const User = ()=>import('../components/User')
 
 Vue.use(VueRouter)
 
@@ -45,6 +51,12 @@ const  routes=[
   {
     path:'/about',
     component:About
+  },
+// 这里只有在后面拼接上对应的userId才能跳转到这个组件
+// 需要在前面跳转时拼接上对应的东西
+  {
+    path:'/user/:userId',
+    component:User
   }
 
 
