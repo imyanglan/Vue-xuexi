@@ -19,6 +19,12 @@ import Vue from 'vue'
 // import User from '../components/User'
 
 const Home = ()=>import('../components/Home')
+
+// 对子路由进行懒加载
+const HomeNews=()=>import('../components/HomeNews')
+const HomeMessage=()=>import('../components/HomeMessage')
+//对子路由进行懒加载
+
 const About = ()=>import('../components/About')
 const User = ()=>import('../components/User')
 
@@ -46,7 +52,25 @@ const  routes=[
   path:'/home',
     // 这里配置个/home就是表示如果出现这个路径的话出现下面这个组件
     // 所以我们要把刚刚创建的组件导入到这里面调用
-  component:Home
+  component:Home,
+    // 嵌套路由 因为都是嵌套在某个路由下，所以需要包含在某个路由组件里面，在外面创建就是同级关系了
+// 在这里加上一个属性children 也是数组类型，这样就可以放多个参数对象
+    children:[
+      {
+        path:'',
+        redirect:'news'//嵌套默认路径
+
+      },
+      {
+        path:'news', //如果是我们子路由的时候这里前面就不需要加/   它会自动拼接上我们写的这个news
+        component:HomeNews
+      },
+      {
+        path:'message',
+        component:HomeMessage
+      }
+    ]
+
   },
   {
     path:'/about',
