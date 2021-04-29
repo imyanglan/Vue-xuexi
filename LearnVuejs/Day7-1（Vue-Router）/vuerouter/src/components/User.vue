@@ -7,6 +7,7 @@
   <h2>{{userId}}</h2>
 <!--也可以直接在这里面查-->
   <H2>{{$route.params.userId}}</H2>
+  <button @click="btnClick">按钮</button>
 </div>
 </template>
 
@@ -21,7 +22,14 @@
         return this.$route.params.userId
         // 通过这种方式拿到传过来的用户ID
       }
-
+    },
+    methods:{
+      btnClick(){
+        console.log(this.$router);
+        console.log(this.$route);
+        // this.test();
+        // console.log(this.name);
+      }
     }
   }
 </script>
