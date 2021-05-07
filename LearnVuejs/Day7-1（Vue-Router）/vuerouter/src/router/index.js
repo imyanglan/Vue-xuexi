@@ -40,7 +40,7 @@ const  routes=[
   {
     path:'',
     // 这里我们给这个路径一个重定向     redirect:重定向
-    redirect:'/home'
+    redirect:'/home',
     // 这样当路径为上面的情况时就让这个路径定向到首页的路径 就完成了默认显示首页
   },
 // 之后需要在这里配置映射关系
@@ -51,6 +51,10 @@ const  routes=[
     // 包括  协议头://主机名还有一些其他东西    而这里的path只有一个相对的路径
     // 映射关系里有两个东西
   path:'/home',
+  meta:{
+    title:'首页'
+  },
+  // 添加源数据，在里面添加title属性
     // 这里配置个/home就是表示如果出现这个路径的话出现下面这个组件
     // 所以我们要把刚刚创建的组件导入到这里面调用
   component:Home,
@@ -60,7 +64,7 @@ const  routes=[
       {
         path:'',
         redirect:'news'//嵌套默认路径
-
+        
       },
       {
         path:'news', //如果是我们子路由的时候这里前面就不需要加/   它会自动拼接上我们写的这个news
@@ -75,16 +79,25 @@ const  routes=[
   },
   {
     path:'/about',
+    meta:{
+      title:'关于'
+    },
     component:About
   },
 // 这里只有在后面拼接上对应的userId才能跳转到这个组件
 // 需要在前面跳转时拼接上对应的东西
   {
     path:'/user/:userId',
+    meta:{
+      title:'用户'
+    },
     component:User
   },
   {
     path:'/profile',
+    meta:{
+      title:'档案'
+    },
     component:Profile,
   }
 
@@ -102,6 +115,17 @@ const router=new VueRouter({
   // 如果要统一改元素router-link-active的默认名称，在这里添加一个属性进行设置
   linkActiveClass:'active'
 })
+// 这里的router对象就是上面建立的router对象 
+// 这个router对象它有一个叫beforeEach的函数 得知它需要传递进去的参数
+// 为函数而那个函数还需要三个参数 直接写成一个箭头函数传递过去如下
+router.beforeEach((to,form,next)=>{
+ // 永远取第一个，当你只有一个路由的时候它取到的也是当前的这个
+  document.title=to.matched[0].meta.title;
+  // 要重新实现这个函数在这里面必须调next 不调next它路由就不能进行跳转了
+  next()
+});
+
+
 
 // 3.将router对象传入到Vue实例中
 // 为了让Vue实例能拿到这个VueRouter我们得将它导出

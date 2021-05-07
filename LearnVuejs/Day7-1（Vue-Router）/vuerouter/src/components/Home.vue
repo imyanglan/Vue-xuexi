@@ -16,8 +16,12 @@ router-view了  而为了告诉子路由该在什么时候显示我们也还要�
 
 <script>
   export default {
-    name: "Home"
+    name: "Home",
+    //  created(){
+    //   document.title='首页'
+    // }
   }
+  
 </script>
 
 <style scoped>

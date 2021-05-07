@@ -30,7 +30,10 @@
         // this.test();
         // console.log(this.name);
       }
-    }
+    },
+    //  created(){
+    //   document.title='用户'
+    // }
   }
 </script>
 
