@@ -13,6 +13,14 @@ export default {
     //  created(){
     //   document.title='档案'
     // }
+     created() {
+    //  组件创建完之后
+    console.log("Profile created");
+  },
+  destroyed() {
+    // 组件销毁之后
+    console.log("Profile destroyed");
+  },
 }
 </script>
 <style>

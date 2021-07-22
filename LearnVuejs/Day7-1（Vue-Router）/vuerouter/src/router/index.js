@@ -61,11 +61,11 @@ const  routes=[
     // 嵌套路由 因为都是嵌套在某个路由下，所以需要包含在某个路由组件里面，在外面创建就是同级关系了
 // 在这里加上一个属性children 也是数组类型，这样就可以放多个参数对象
     children:[
-      {
-        path:'',
-        redirect:'news'//嵌套默认路径
+      // {
+      //   path:'',
+      //   redirect:'news'//嵌套默认路径
         
-      },
+      // },
       {
         path:'news', //如果是我们子路由的时候这里前面就不需要加/   它会自动拼接上我们写的这个news
         component:HomeNews
@@ -125,7 +125,7 @@ router.beforeEach((to,form,next)=>{
   next()
 });
 
-
+   
 
 // 3.将router对象传入到Vue实例中
 // 为了让Vue实例能拿到这个VueRouter我们得将它导出
